@@ -1,0 +1,45 @@
+{{ define "main" }}
+<main class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-12 text-gray-100">
+  <div class="grid grid-cols-12 gap-6">
+    <aside class="hidden lg:block col-span-3">
+      <div class="sticky top-24">
+        <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">Table of Contents</div>
+        {{- if .TableOfContents -}}
+        <nav class="toc text-sm text-gray-300 border border-gray-800/70 bg-[#070709] rounded-sm p-4">
+          {{ .TableOfContents }}
+        </nav>
+        {{- else -}}
+        <div class="text-sm text-gray-500 border border-gray-800/70 bg-[#070709] rounded-sm p-4">
+          No headings.
+        </div>
+        {{- end -}}
+      </div>
+    </aside>
+
+    <article class="col-span-12 lg:col-span-7">
+      {{ partial "article/meta.html" . }}
+
+      <div class="lg:hidden mb-6">
+        <details class="border border-gray-800/70 bg-[#070709] rounded-sm">
+          <summary class="cursor-pointer select-none px-4 py-3 text-gray-200 hover:text-white transition-colors">
+            Table of Contents
+          </summary>
+          <div class="px-4 pb-4 toc text-sm text-gray-300">
+            {{ .TableOfContents }}
+          </div>
+        </details>
+      </div>
+
+      <div class="md-surface border border-gray-800/70 bg-[#070709] rounded-sm p-4 sm:p-6">
+        <div class="md-content text-base leading-relaxed text-gray-200">
+          {{ .Content }}
+        </div>
+      </div>
+
+      <!-- same scoped <style> block as projects/single.html (copy it here) -->
+    </article>
+
+    <div class="hidden lg:block col-span-2"></div>
+  </div>
+</main>
+{{ end }}

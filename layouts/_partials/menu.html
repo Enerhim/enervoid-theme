@@ -1,0 +1,43 @@
+{{- /*
+menu.html
+Expects: (dict "menuID" "main" "page" .)
+Renders a responsive list of menu items with Tailwind classes.
+*/ -}}
+
+{{- $page := .page -}}
+{{- $menuID := .menuID -}}
+
+{{- with index site.Menus $menuID }}
+{{/* Desktop menu (rendered when used inside header.html) and mobile (same markup; visibility controlled by parent) */}}
+<nav aria-label="Primary" class="w-full">
+  <ul
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl">
+    {{- range . }}
+    {{- $attrs := dict "href" (.URL | relURL) -}}
+    {{- if $page.IsMenuCurrent .Menu . }}
+    {{- $attrs = merge $attrs (dict "aria-current" "page") -}}
+    {{- else if $page.HasMenuCurrent .Menu . }}
+    {{- $attrs = merge $attrs (dict "aria-current" "true") -}}
+    {{- end -}}
+
+    <li>
+      <a {{- range $k, $v :=$attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}
+        class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>{{ .Name }}</span>
+          <!-- underline grow: uses pseudo-element utilities via Tailwind JIT -->
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+
+      {{- with .Children }}
+      <ul class="pl-4 mt-1">
+        {{- partial "menu.html" (dict "menuID" $menuID "page" $page) -}}
+      </ul>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}

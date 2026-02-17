@@ -1,0 +1,53 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{- $res := false -}} {{/* must be in outer scope */}}
+
+{{- if not $u.IsAbs -}}
+{{- if hasPrefix $u.Path "/" -}}
+{{- $src = ($u.Path | relURL) -}}
+{{- else -}}
+{{- $path := $u.Path | strings.TrimPrefix "./" -}}
+
+{{- with .Page.Resources.Get $path -}}
+{{- $res = . -}}
+{{- end -}}
+
+{{- if not $res -}}
+{{- with .Page.Resources.GetMatch $path -}}
+{{- $res = . -}}
+{{- end -}}
+{{- end -}}
+
+{{- if not $res -}}
+{{- with resources.Get $path -}}
+{{- $res = . -}}
+{{- end -}}
+{{- end -}}
+
+{{- with $res -}}
+{{- $src = .RelPermalink -}}
+{{- else -}}
+{{- $src = (path.Join .Page.RelPermalink $path) -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{- with $u.Fragment -}}
+{{- $src = printf "%s#%s" $src . -}}
+{{- end -}}
+
+{{- $alt := "" -}}
+{{- with .PlainText -}}{{- $alt = . -}}{{- else -}}{{- $alt = .Text -}}{{- end -}}
+
+{{- if .IsBlock -}}
+<figure class="my-6 flex justify-center">
+  <img class="block mx-auto rounded-md border border-gray-800/70 bg-black/20" src="{{ $src | safeURL }}" loading="lazy"
+    decoding="async" alt="{{ $alt }}" {{- with $res -}} width="{{ .Width }}" height="{{ .Height }}" {{- end -}}>
+  {{- with .Title -}}
+  <figcaption class="mt-2 text-sm text-gray-400">{{ . }}</figcaption>
+  {{- end -}}
+</figure>
+{{- else -}}
+<img class="mx-auto my-6 rounded-md border border-gray-800/70 bg-black/20" src="{{ $src | safeURL }}" loading="lazy" decoding="async"
+  alt="{{ $alt }}">
+{{- end -}}

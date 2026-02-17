@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+<section class="relative border border-gray-200 bg-[#070709] rounded-sm p-8 md:p-12 text-gray-300">
+
+  <!-- Heading -->
+  <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-200 mb-6 tracking-wide">
+    About Me
+    <!-- <span class="inline-block mr-3" style="animation: flicker 1.8s steps(2,end) infinite;">_</span> -->
+  </h1>
+
+  <!-- Content -->
+  <div class="space-y-6 sm:text-lg md:text-xl lg:text-2xl leading-relaxed [&_a]:text-blue-200
+            [&_a]:underline
+            [&_a:hover]:text-blue-100
+            [&_a]:transition-colors
+            [&_a]:duration-200">
+
+    {{ with site.GetPage "page" "about.md"}}
+    {{ .Content}}
+    {{ end }}
+
+  </div>
+
+</section>
+{{ end }}

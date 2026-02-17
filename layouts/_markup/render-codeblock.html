@@ -1,0 +1,27 @@
+{{- $lang := (.Type | default "text") -}}
+{{- if eq $lang "mermaid" -}}
+<div class="my-7 flex justify-center">
+  <div class="mermaid">
+    {{- .Inner -}}
+  </div>
+</div>
+{{- else -}}
+<div class="my-7 rounded-sm border border-gray-800/80 bg-black/40 overflow-hidden">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-gray-800/70 bg-[#070709]">
+    <span class="text-xs uppercase tracking-widest text-gray-500">{{ $lang }}</span>
+    <span class="text-xs text-gray-600 font-mono">///</span>
+  </div>
+  <div class="codewrap overflow-x-auto">
+    <div class="p-4">
+      {{- highlight .Inner $lang "" -}}
+    </div>
+  </div>
+</div>
+<style>
+  .codewrap pre,
+  .codewrap .chroma { background: transparent !important; margin: 0 !important; }
+  .codewrap pre { padding: 0 !important; overflow: visible !important; }
+  .codewrap code { background: transparent !important; border: 0 !important; padding: 0 !important; font-size: 0.95rem; line-height: 1.55; color: rgba(229, 231, 235, 0.92); }
+  .codewrap { background: rgba(0,0,0,0.20); }
+</style>
+{{- end -}}

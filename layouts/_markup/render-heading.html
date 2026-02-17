@@ -1,0 +1,11 @@
+{{- $level := .Level -}}
+{{- $id := .Anchor | safeURL -}}
+<h{{ $level }} id="{{ $id }}" class="{{ cond (eq $level 1) " mt-8 mb-3 text-2xl sm:text-3xl text-white" (cond (eq $level
+  2) "mt-8 mb-3 text-xl sm:text-2xl text-white" (cond (eq $level
+  3) "mt-6 mb-2 text-lg sm:text-xl text-white" "mt-5 mb-2 text-base sm:text-lg text-white" )) }}">
+    <span class="relative inline-block">
+      {{ .Text }}
+      <span
+        class="absolute left-0 -bottom-1 h-px w-0 bg-indigo-400"></span>
+    </span>
+</h{{ $level }}>

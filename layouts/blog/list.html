@@ -1,0 +1,50 @@
+{{ define "main" }}
+<main class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-12 text-gray-100">
+  <header class="mb-8">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl tracking-wide text-white">{{ .Title }}</h1>
+    <p class="mt-2 text-sm sm:text-base text-gray-400">
+      {{ len .RegularPages }} items under this folder.
+    </p>
+  </header>
+
+  {{- $pages := .RegularPages.ByDate.Reverse -}}
+
+  <div class="border border-gray-800/70 rounded-sm bg-[#070709] divide-y divide-gray-800/80 overflow-hidden">
+    {{- if gt (len $pages) 0 -}}
+    {{- range $pages -}}
+    <a href="{{ .RelPermalink }}" class="group block px-4 sm:px-6 py-4 transition-colors duration-200 hover:bg-white/5">
+      <div class="grid grid-cols-12 gap-4 items-start">
+        <div class="col-span-12 md:col-span-8">
+          <div class="text-xs sm:text-sm text-gray-500 font-mono">
+            <span>{{ .Date.Format "Jan 02, 2006" }}</span>
+            <span class="mx-2 text-gray-700">•</span>
+            <span>{{ .Date.Format "15:04" }}</span>
+          </div>
+
+          <div class="mt-1 text-lg sm:text-xl text-gray-100">
+            <span class="relative inline-block">
+              {{ .Title }}
+              <span
+                class="absolute left-0 -bottom-1 h-px w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 flex md:justify-end flex-wrap gap-2">
+          {{- with .Params.tags -}}
+          {{- range . -}}
+          <span class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-700/70 text-gray-300 bg-black/30">
+            #{{ . }}
+          </span>
+          {{- end -}}
+          {{- end -}}
+        </div>
+      </div>
+    </a>
+    {{- end -}}
+    {{- else -}}
+    <div class="px-4 sm:px-6 py-10 text-gray-400">No entries yet.</div>
+    {{- end -}}
+  </div>
+</main>
+{{ end }}

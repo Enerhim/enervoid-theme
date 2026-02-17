@@ -1,0 +1,99 @@
+{{- /* header.html - top-level navbar for site */ -}}
+<div class="sticky absolute top-0 z-50">
+  <nav class="w-full border-b border-gray-800 bg-[#070709]/95 backdrop-blur-sm text-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <!-- Left: avatar + title -->
+        <div class="flex items-center gap-3">
+          <a href='{{ "/" | relURL }}' class="flex items-center gap-3 group" aria-label="Homepage">
+            <img src='{{ with site.Params.avatar }}{{ . | relURL }}{{ else }}{{ "/images/avatar.jpg" | relURL }}{{ end
+              }}' alt="{{ site.Title }}"
+              class="w-10 h-10 rounded-sm border-2 border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
+              style="animation: border-breathe 4s ease-in-out infinite;" />
+            <span class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide">
+              {{ site.Title }}
+              <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
+            </span>
+          </a>
+        </div>
+
+        <!-- Right: menu (desktop) + mobile toggle -->
+        <div class="flex items-center gap-4">
+          <!-- Desktop menu (hidden on small screens) -->
+          <div class="hidden md:flex items-center">
+            {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+          </div>
+
+          <!-- Mobile: sandwich button -->
+          <div class="md:hidden">
+            <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
+              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              aria-label="Open menu">
+              <svg class="h-6 w-6 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu (hidden by default) -->
+      <div id="mobile-menu" class="md:hidden hidden pb-4">
+        {{/* Reuse menu partial for mobile layout; partial is written to output flexible markup */}}
+        {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Minimal, self-contained animations -->
+  <style>
+    @keyframes flicker {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      10% {
+        opacity: 0.2;
+        transform: translateY(-1px);
+      }
+
+      20% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes border-breathe {
+      0% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
+      }
+
+      50% {
+        box-shadow: 0 0 18px 6px rgba(99, 102, 241, 0.03);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
+      }
+    }
+  </style>
+
+  <!-- Tiny toggle script (vanilla JS) -->
+  <script>
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        const open = menu.classList.toggle('hidden') === false;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+</div>

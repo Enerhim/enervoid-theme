@@ -1,0 +1,30 @@
+<div class="border-t border-gray-800 bg-[#070709] text-gray-400">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between py-6 space-y-4 md:space-y-0">
+
+      <!-- Left Side -->
+      <div class="text-sm sm:text-base md:text-lg">
+        <span class="relative inline-block">
+          © {{ now.Year }} {{ site.Title }}. All rights reserved. <br>
+          Made with <a href="https://gohugo.io" target="_blank">Hugo</a> | <a
+            href="https://github.com/Enerhim/enervoid-theme" target="_blank">Enervoid</a>
+        </span>
+      </div>
+
+      <!-- Right Side (Socials) -->
+      <div class="flex items-center space-x-6 text-sm sm:text-base md:text-lg">
+
+        {{ range site.Params.socials }}
+        <a href='{{ .link }}' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-200">
+          {{ .name }}
+          <i class="{{ .icon }}"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+</div>
