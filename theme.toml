@@ -6,7 +6,7 @@ description = "A dark, minimal, lightweight theme for Hugo using Tailwind"
 homepage = "https://github.com/gohugoio/gohugoioTheme"
 demosite = "https://gohugo.io"
 
-tags = ["blog", "minimal", "personal", "dark", "tailwind", "math", "katex". "personal", "clean", "code", "mermaid"]
+tags = ["blog", "minimal", "personal", "dark", "tailwind", "math", "katex", "personal", "clean", "code", "mermaid"]
 features = ["syntax highlighting", "dark theme", "responsive design", "table of contents", "math"]
 
 # If the theme has a single author

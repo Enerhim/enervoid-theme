@@ -1,0 +1,55 @@
+baseURL = 'https://example.com'
+languageCode = 'en-us'
+title = "Your Name"
+theme = "enervoid"
+
+[menus]
+  [[menus.main]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 10
+
+  [[menus.main]]
+    name = 'Personal'
+    pageRef = '/personal'
+    weight = 20
+
+  [[menus.main]]
+    name = 'Projects'
+    pageRef = '/projects'
+    weight = 30
+
+[params]
+  avatar = "https://picsum.photos/200"
+
+  [[params.socials]]
+      link = "https://github.com/yourgithub"
+      icon = "devicon-github-original"
+  [[params.socials]]
+      link = "https://twitter.com/yourx"
+      icon = "devicon-twitter-original"
+   [[params.socials]]
+      link = "https://linkedin.in/yourlinkedin"
+      icon = "devicon-linkedin-plain"
+    [[params.socials]]
+      link = "https://itch.io/profile/youritch"
+      icon = "fa-brands fa-itch-io" 
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$','$$'], ['\\[','\\]']]
+        inline = [['$','$'], ['\\(','\\)']]
+
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+
+[markup.highlight]
+  noClasses = true
+  codeFences = true
+  guessSyntax = true
+  tabWidth = 4
+  style = "monokai"
