@@ -5,7 +5,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Left: avatar + title -->
         <div class="flex items-center gap-3">
-          <a href='{{ "/" | relURL }}' class="flex items-center gap-3 group" aria-label="Homepage">
+          <a href='{{ site.baseURL | relURL }}' class="flex items-center gap-3 group" aria-label="Homepage">
             <img src='{{ with site.Params.avatar }}{{ . | relURL }}{{ else }}{{ "/images/avatar.jpg" | relURL }}{{ end
               }}' alt="{{ site.Title }}"
               class="w-10 h-10 rounded-sm border-2 border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
