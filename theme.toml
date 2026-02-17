@@ -4,7 +4,7 @@ license = "MIT"
 licenselink = "https://github.com/Enerhim/enervoid-theme/blob/main/LICENSE"
 description = "A dark, minimal, lightweight theme for Hugo using Tailwind"
 homepage = "https://github.com/Enerhim/enervoid-theme"
-demosite = ""
+demosite = "https://enerhim.github.io/enervoid-demo/"
 
 tags = ["blog", "minimal", "personal", "dark", "tailwind", "math", "katex", "personal", "clean", "code", "mermaid"]
 features = ["syntax highlighting", "dark theme", "responsive design", "table of contents", "math"]
