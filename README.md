@@ -4,14 +4,11 @@
   A simple black theme for Hugo with KaTeX & mermaid support.   
 </p>
 
-[Demo Site](https://enerhim.github.io/enervoid-demo/)
-
-
 <p align="center">
   <img src="https://img.shields.io/github/license/Enerhim/enervoid-theme?color=blue"/>
 </p>
 
-
+[Demo Site](https://enerhim.github.io/enervoid-demo/)
 
 ## Images
 <details>
